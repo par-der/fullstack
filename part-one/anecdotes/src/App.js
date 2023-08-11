@@ -7,6 +7,13 @@ const handleAnecdotesClick = (min, max, setSelected) => {
   setSelected(uppdateAbecdotes)
 }
 
+const handleVotesClick = (votes, setVotes, point) => {
+  const copy = { ...votes }
+  copy[point] += 1
+  setVotes(copy)
+  console.log(copy)
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -20,10 +27,13 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState([0,0,0,0,0,0,0,0])
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={() => {handleVotesClick(votes, setVotes, selected)}}>vote</button>
       <button onClick={() => {handleAnecdotesClick(0, 8, setSelected)}}>next anecdotes</button>
     </div>
   )
