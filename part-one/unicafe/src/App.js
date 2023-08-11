@@ -1,16 +1,32 @@
 import { useState } from 'react'
 
+const Button = () => {
+  return (
+    <div>
+
+    </div>
+  )
+}
+
+const StatisticLine = ({ text, value, extra }) => {
+  return (
+    <div>
+      <p>{text} {value} {extra}</p>
+    </div>
+  )
+}
+
 const Statistics = (props) => {
   if(props.total > 0){
     return (
       <div>
         <h2>statistics</h2>
-        <p>good {props.good}</p>
-        <p>neutral {props.neutral}</p>
-        <p>bad {props.bad}</p>
-        <p>all {props.total}</p>
-        <p>average {(props.good-props.bad)/props.total}</p>
-        <p>positive {props.positive} %</p>
+        <StatisticLine text='good' value={props.good} />
+        <StatisticLine text='neutral' value={props.neutral} />
+        <StatisticLine text='bad' value={props.bad} />
+        <StatisticLine text='all' value={props.total} />
+        <StatisticLine text='average' value={(props.good-props.bad)/props.total} />
+        <StatisticLine text='positive' value={props.positive} extra='%' />
       </div>
     )
   }
@@ -26,11 +42,8 @@ const Statistics = (props) => {
 const handleGoodClick = (good, setGood, bad, neutral, setTotal, setPositive, setAverage) => {
   const updatedGood = good + 1
   setGood(updatedGood)
-
   const updatedTotal = updatedGood + bad + neutral
   setTotal(updatedTotal)
-  //console.log(updatedGood)
-
   const goodPercentage = updatedGood/updatedTotal * 100
   setPositive(goodPercentage)
   setAverage(goodPercentage/updatedTotal)
@@ -39,7 +52,6 @@ const handleGoodClick = (good, setGood, bad, neutral, setTotal, setPositive, set
 const handleNeutralClick = (good, bad, neutral, setTotal, setNeutral) => {
   const updatedNeutral = neutral + 1
   setNeutral(updatedNeutral)
-
   const updatedTotal = good + bad + updatedNeutral
   setTotal(updatedTotal)
 }
@@ -47,7 +59,6 @@ const handleNeutralClick = (good, bad, neutral, setTotal, setNeutral) => {
 const handleBadClick = (good, bad, setBad, neutral, setTotal) => {
   const updatedBad = bad + 1
   setBad(updatedBad)
-
   const updatedTotal = good + updatedBad + neutral
   setTotal(updatedTotal)
 }
