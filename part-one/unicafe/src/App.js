@@ -1,17 +1,26 @@
 import { useState } from 'react'
 
 const Statistics = (props) => {
+  if(props.total > 0){
+    return (
+      <div>
+        <h2>statistics</h2>
+        <p>good {props.good}</p>
+        <p>neutral {props.neutral}</p>
+        <p>bad {props.bad}</p>
+        <p>all {props.total}</p>
+        <p>average {(props.good-props.bad)/props.total}</p>
+        <p>positive {props.positive} %</p>
+      </div>
+    )
+  }
   return (
     <div>
-      <h2>statistics</h2>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.total}</p>
-      <p>average {(props.good-props.bad)/props.total}</p>
-      <p>positive {props.positive} %</p>
+      <h1>statistics</h1>
+      <p>No feedback given</p>
     </div>
   )
+  
 }
 
 const handleGoodClick = (good, setGood, bad, neutral, setTotal, setPositive, setAverage) => {
@@ -52,15 +61,16 @@ const App = () => {
   const [average, setAverage] = useState(0)
   const [positive, setPositive] = useState(0)
 
-  return (
-    <div>
-      <h1>give feedback</h1>
-      <button onClick={() => handleGoodClick(good, setGood, bad, neutral, setTotal, setPositive, setAverage)}>good</button>
-      <button onClick={() => handleNeutralClick(good, bad, neutral, setTotal, setNeutral)}>neutral</button>
-      <button onClick={() => handleBadClick(good, bad, setBad, neutral, setTotal)}>bad</button>
-      <Statistics good={good} neutral={neutral} bad={bad} total={total} positive={positive} />
-    </div>
-  )
+    return ( 
+      <div>
+        <h1>give feedback</h1>
+        <button onClick={() => handleGoodClick(good, setGood, bad, neutral, setTotal, setPositive, setAverage)}>good</button>
+        <button onClick={() => handleNeutralClick(good, bad, neutral, setTotal, setNeutral)}>neutral</button>
+        <button onClick={() => handleBadClick(good, bad, setBad, neutral, setTotal)}>bad</button>
+        <Statistics good={good} neutral={neutral} bad={bad} total={total} positive={positive} />
+      </div>
+    )
+  
 }
 
 export default App
