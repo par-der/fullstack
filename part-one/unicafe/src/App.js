@@ -10,9 +10,13 @@ const Button = () => {
 
 const StatisticLine = ({ text, value, extra }) => {
   return (
-    <div>
-      <p>{text} {value} {extra}</p>
-    </div>
+    <tbody>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+        <td>{extra}</td>
+      </tr>
+    </tbody>
   )
 }
 
