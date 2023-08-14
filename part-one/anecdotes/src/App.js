@@ -29,12 +29,30 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState([0,0,0,0,0,0,0,0])
 
+  let largest = 0
+  let index = 0
+  let mostPopular = 0
+  Object.keys(votes).forEach( (element) => {
+    if (element > largest) {
+      
+      largest = element
+      mostPopular = index
+      console.log(index)
+    }
+    index += 1
+  })
+  
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={() => {handleVotesClick(votes, setVotes, selected)}}>vote</button>
       <button onClick={() => {handleAnecdotesClick(0, 8, setSelected)}}>next anecdotes</button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostPopular]}</p>
+      <p>has {largest} votes</p>
     </div>
   )
 }
